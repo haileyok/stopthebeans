@@ -1,0 +1,24 @@
+{
+  "name": "stopthebeans",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.28",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.18.0",
+    "@atproto/api": "^0.11.1",
+    "@atproto/ozone": "^0.1.1",
+    "atproto-firehose": "^0.2.2",
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5"
+  },
+  "scripts": {
+    "build": "npx tsc",
+    "watch": "npx tsc -w",
+    "start": "node index.js"
+  }
+}
