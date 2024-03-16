@@ -132,7 +132,7 @@ const handleIncoming = async (parentUri: string, root: {uri: string, cid: string
             uri: post.uri,
             cid: post.cid,
           },
-          createdBy: (await agent.resolveHandle({handle: process.env.BSKY_HANDLE ?? ''})).data.did,
+          createdBy: agent.session?.did ?? '',
           createdAt: new Date().toISOString(),
           subjectBlobCids: [],
         })
