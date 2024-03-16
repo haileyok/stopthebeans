@@ -144,7 +144,7 @@ const handleIncoming = async (parentUri: string, root: {uri: string, cid: string
         })
       }
 
-      makePost(result.content[0].text.replace('TRUE', 'Labeling this HORRIBLE bean post!'), root, curr)
+      makePost(result.content[0].text.replace('TRUE', ''), root, curr)
     } catch(e) {
       console.log(e)
     } finally {
