@@ -86,7 +86,7 @@ I'm also told that if there is even a 50% chance of beans being present in an im
 
 If I find beans in the image, then I will respond with my explanation and then a new line and then TRUE, and if I do not I will respond with a new line and then FALSE. I should also include my conclusion - a percentage - on how likely there are beans in the image.
 
-IDENTIFY ALL THE BEANS!!!
+IDENTIFY ALL THE BEANS!!! Even if the beans are a drawing, cartoon, AI generated, etc. they should be identified as beans. Jelly beans should also be identified as beans.
     `,
     messages: [
       {
