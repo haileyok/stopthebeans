@@ -129,17 +129,23 @@ const checkImage = (base64) => __awaiter(void 0, void 0, void 0, function* () {
     });
 });
 const handleIncoming = (parentUri, root, curr) => __awaiter(void 0, void 0, void 0, function* () {
-    var _d;
+    var _d, _e;
     if (processedUris.has(parentUri))
         return;
     const post = (yield agent.getPosts({ uris: [parentUri] })).data.posts[0];
     console.log('try');
-    if (post.embed && api_1.AppBskyEmbedImages.isView(post.embed)) {
-        if (working)
+    if (post.embed) {
+        let image;
+        if (api_1.AppBskyEmbedImages.isView(post.embed)) {
+            image = post.embed.images[0];
+        }
+        else if (api_1.AppBskyEmbedRecordWithMedia.isView(post.embed) && api_1.AppBskyEmbedImages.isView(post.embed.media)) {
+            image = post.embed.media.images[0];
+        }
+        if (!image || working)
             return;
         try {
             working = true;
-            const image = post.embed.images[0];
             const base64 = yield getImageBase64(image.fullsize);
             const result = yield checkImage(base64);
             if (result.content[0].text.includes('TRUE')) {
@@ -154,7 +160,7 @@ const handleIncoming = (parentUri, root, curr) => __awaiter(void 0, void 0, void
                         uri: post.uri,
                         cid: post.cid,
                     },
-                    createdBy: (yield agent.resolveHandle({ handle: (_d = process.env.BSKY_HANDLE) !== null && _d !== void 0 ? _d : '' })).data.did,
+                    createdBy: (_e = (_d = agent.session) === null || _d === void 0 ? void 0 : _d.did) !== null && _e !== void 0 ? _e : '',
                     createdAt: new Date().toISOString(),
                     subjectBlobCids: [],
                 });

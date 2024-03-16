@@ -1,5 +1,5 @@
 import {
-  AppBskyEmbedImages,
+  AppBskyEmbedImages, AppBskyEmbedRecordWithMedia,
   AppBskyFeedPost,
   BskyAgent,
 } from '@atproto/api'
@@ -112,11 +112,17 @@ const handleIncoming = async (parentUri: string, root: {uri: string, cid: string
   const post = (await agent.getPosts({uris: [parentUri]})).data.posts[0]
   console.log('try')
 
-  if (post.embed && AppBskyEmbedImages.isView(post.embed)) {
-    if(working) return
+  if (post.embed) {
+    let image
+    if (AppBskyEmbedImages.isView(post.embed)) {
+      image = post.embed.images[0]
+    } else if (AppBskyEmbedRecordWithMedia.isView(post.embed) && AppBskyEmbedImages.isView(post.embed.media)) {
+      image = post.embed.media.images[0]
+    }
+
+    if (!image || working) return
     try {
       working = true
-      const image = post.embed.images[0]
       const base64 = await getImageBase64(image.fullsize)
       const result = await checkImage(base64)
 
