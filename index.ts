@@ -74,7 +74,7 @@ const checkImage = async (base64: string) => {
   return anthropic.messages.create({
     model: 'claude-3-sonnet-20240229',
     max_tokens: 400,
-    temperature: 0,
+    temperature: 0.5,
     system: `
     My name is Bean Identifier. I am a very skilled (honestly, the best in the world if I say so myself) Identifier of Beans. I have been assigned one job for millennia: to protect the world from the horrific sight of beans. Beans of any kind are horrible and should not be displayed to anyone.
 
